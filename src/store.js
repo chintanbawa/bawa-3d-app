@@ -1,23 +1,11 @@
 import { create } from 'zustand'
+import { carColors } from './utils/carColors'
 
 export const useColorStore = create((set) => ({
-    colors: {
-        exterior: '#000',
-        grills: '#fff',
-        light_tire_cap: '#fff',
-        window_glass: '#ccc',
-        rim_spokes: '#f00',
-        body_base: '#f00',
-        engine_pipes: '#f00',
-        fan: '#ccc',
-        side_mirrors: '#ccc',
-        interior: '#f00',
-        back_light: '#f00',
-        gear_lever: '#f00',
-        tires: '#000'
-    },
+    carColor: carColors['black'],
+    setCarColor: (changedColor) => set({ carColor: changedColor }),
     setColor: (part, color) =>
         set((state) => ({
-            colors: { ...state.colors, [part]: color },
+            carColor: { ...state.carColor, partsColor: { ...state.carColor.partsColor, [part]: color } },
         })),
 }))

@@ -5,32 +5,12 @@ import { meshToPart } from './utils/meshToPart';
 import { carColors } from './utils/carColors';
 import ColorDot from './compnents/ColorDot';
 import ColorPanel from './compnents/ColorPanel';
-
-function Model({ colors }) {
-  const { scene } = useGLTF('/models/car.glb');
-
-  useEffect(() => {
-    const disposables = [];
-    scene.traverse(child => {
-      if (child.isMesh) {
-        const part = meshToPart[child.name];
-        if (part) {
-          const oldMaterial = child.material;
-          child.material = oldMaterial.clone();
-          child.material.color.set(colors[part]);
-          disposables.push(oldMaterial);
-        }
-      }
-    });
-    return () => disposables.forEach(mat => mat.dispose());
-  }, [colors, scene]);
-
-  return <primitive object={scene} />;
-}
+import Model from './compnents/Model';
+import { useColorStore } from './store';
 
 const App = () => {
-  const [selectedColor, setSelectedColor] = useState(carColors['black']);
-
+  const { carColor, setCarColor } = useColorStore();
+  console.log('carColor = ', carColor);
   return (
     <div
       style={{
@@ -52,7 +32,7 @@ const App = () => {
               </mesh>
             }
           >
-            <Model colors={selectedColor.colors} />
+            <Model partsColor={carColor.partsColor} />
           </Suspense>
           <OrbitControls />
         </Canvas>
@@ -70,9 +50,9 @@ const App = () => {
         {Object.keys(carColors).map(key => (
           <ColorDot
             key={key}
-            backgroundColor={carColors[key].colorCode}
-            isSelected={selectedColor.colorCode === carColors[key].colorCode}
-            onClick={() => setSelectedColor(carColors[key])}
+            backgroundColor={carColors[key].code}
+            isSelected={carColor.code === carColors[key].code}
+            onClick={() => setCarColor(carColors[key])}
             label={key}
           />
         ))}

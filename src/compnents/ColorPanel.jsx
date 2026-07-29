@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useColorStore } from '../store';
 import { meshToPart } from '../utils/meshToPart';
+import ColorDot from './ColorDot';
 
 const swatches = [
   '#ff0000',
@@ -39,16 +40,11 @@ export default function ColorPanel() {
 
       <div style={{ display: 'flex', gap: 8 }}>
         {swatches.map(color => (
-          <div
+          <ColorDot
             key={color}
+            backgroundColor={color}
             onClick={() => setColor(selectedPart, color)}
-            style={{
-              width: 30,
-              height: 30,
-              background: color,
-              cursor: 'pointer',
-              border: '1px solid #ccc'
-            }}
+            label={color}
           />
         ))}
       </div>

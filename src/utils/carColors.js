@@ -1,7 +1,7 @@
 export const carColors = {
     black: {
-        colorCode: '#000',
-        colors: {
+        code: '#000',
+        partsColor: {
             exterior: '#000',
             grills: '#fff',
             light_tire_cap: '#fff',
@@ -18,8 +18,8 @@ export const carColors = {
         }
     },
     red: {
-        colorCode: '#d90429',
-        colors: {
+        code: '#d90429',
+        partsColor: {
             exterior: '#d90429',
             grills: '#fff',
             light_tire_cap: '#fff',
@@ -36,8 +36,8 @@ export const carColors = {
         }
     },
     green: {
-        colorCode: '#0b6623',
-        colors: {
+        code: '#0b6623',
+        partsColor: {
             exterior: '#0b6623',
             grills: '#fff',
             light_tire_cap: '#fff',
@@ -54,8 +54,8 @@ export const carColors = {
         }
     },
     blue: {
-        colorCode: '#0057b8',
-        colors: {
+        code: '#0057b8',
+        partsColor: {
             exterior: '#0057b8',
             grills: '#fff',
             light_tire_cap: '#fff',
