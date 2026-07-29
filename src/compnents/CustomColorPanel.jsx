@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useColorStore } from '../store';
-import { meshToPart } from '../utils/meshToPart';
+import { colorPanelParts } from '../utils/colorPanelParts';
 import ColorDot from './ColorDot';
 
 const swatches = [
@@ -9,32 +9,61 @@ const swatches = [
   '#0000ff',
   '#ffffff',
   '#000000',
-  '#ffaa00'
+  '#ffaa00',
+  '#ff69b4',
+  '#8a2be2'
 ];
 
 export default function CustomColorPanel() {
   const setColor = useColorStore(state => state.setColor);
   const [selectedPart, setSelectedPart] = useState(
-    meshToPart['mesh1643766101']
+    colorPanelParts[0].slug
   );
 
   return (
     <div
       style={{
-        background: 'white',
-        padding: 16,
+        background: 'var(--bg)',
+        border: '1px solid var(--border)',
+        boxShadow: 'var(--shadow)',
+        padding: '16px',
+        margin: '6px 24px',
         borderRadius: 8
       }}
     >
-      <div style={{ marginBottom: 8 }}>
-        {Object.keys(meshToPart).map(k => (
-          <button key={k} onClick={() => setSelectedPart(meshToPart[k])}>
-            {meshToPart[k]}
-          </button>
-        ))}
+      <div
+        style={{
+          marginBottom: 12,
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: 8
+        }}
+      >
+        {colorPanelParts.map(({ mesh, slug, label }) => {
+          const isSelected = slug === selectedPart;
+          return (
+            <button
+              key={mesh}
+              onClick={() => setSelectedPart(slug)}
+              style={{
+                padding: '6px 14px',
+                borderRadius: 999,
+                border: isSelected
+                  ? '1px solid var(--accent)'
+                  : '1px solid var(--border)',
+                background: isSelected ? 'var(--accent-bg)' : 'transparent',
+                color: isSelected ? 'var(--accent)' : 'var(--text)',
+                cursor: 'pointer'
+              }}
+            >
+              {label}
+            </button>
+          );
+        })}
       </div>
 
-      <div style={{ display: 'flex', gap: 8 }}>
+      <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
         {swatches.map(color => (
           <ColorDot
             key={color}
@@ -44,8 +73,6 @@ export default function CustomColorPanel() {
           />
         ))}
       </div>
-
-      <p>Editing: {selectedPart}</p>
     </div>
   );
 }
