@@ -16,6 +16,7 @@ const swatches = [
 
 export default function CustomColorPanel() {
   const setColor = useColorStore(state => state.setColor);
+  const partsColor = useColorStore(state => state.carColor.partsColor);
   const [selectedPart, setSelectedPart] = useState(
     colorPanelParts[0].slug
   );
@@ -68,6 +69,7 @@ export default function CustomColorPanel() {
           <ColorDot
             key={color}
             backgroundColor={color}
+            isSelected={partsColor[selectedPart] === color}
             onClick={() => setColor(selectedPart, color)}
             label={color}
           />

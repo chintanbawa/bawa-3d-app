@@ -20,9 +20,8 @@ const ColorDot = ({
       background: isCustom
         ? 'conic-gradient(red, yellow, green, blue, red)'
         : backgroundColor,
-      borderWidth: 4,
-      borderStyle: isSelected ? 'solid' : 'none',
-      borderColor: '#fff',
+      outline: isSelected ? '3px solid #fff' : 'none',
+      outlineOffset: isSelected ? 3 : 0,
       cursor: 'pointer'
     }}
     onClick={onClick}
