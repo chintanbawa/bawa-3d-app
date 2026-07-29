@@ -1,4 +1,4 @@
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import React, { Suspense, useEffect, useState } from 'react';
 import { meshToPart } from './utils/meshToPart';
@@ -19,9 +19,8 @@ const App = () => {
       }}
     >
       <div style={{ height: '100vh' }}>
-        <Canvas camera={{ position: [3, 3, 3] }}>
-          <ambientLight intensity={1} />
-          <directionalLight position={[5, 5, 5]} />
+        <Canvas camera={{ position: [-4, 3, 3] }}>
+          <Environment preset='apartment' />
           <Suspense
             fallback={
               <mesh>

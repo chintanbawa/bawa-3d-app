@@ -17,9 +17,7 @@ const swatches = [
 export default function CustomColorPanel() {
   const setColor = useColorStore(state => state.setColor);
   const partsColor = useColorStore(state => state.carColor.partsColor);
-  const [selectedPart, setSelectedPart] = useState(
-    colorPanelParts[0].slug
-  );
+  const [selectedPart, setSelectedPart] = useState(colorPanelParts[0].slug);
 
   return (
     <div
@@ -64,7 +62,7 @@ export default function CustomColorPanel() {
         })}
       </div>
 
-      <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: 16, justifyContent: 'center' }}>
         {swatches.map(color => (
           <ColorDot
             key={color}
