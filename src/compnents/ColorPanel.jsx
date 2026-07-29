@@ -1,55 +1,39 @@
-import { useState } from 'react';
 import { useColorStore } from '../store';
-import { meshToPart } from '../utils/meshToPart';
+import { carColors } from '../utils/carColors';
 import ColorDot from './ColorDot';
-
-const swatches = [
-  '#ff0000',
-  '#00ff00',
-  '#0000ff',
-  '#ffffff',
-  '#000000',
-  '#ffaa00'
-];
+import CustomColorPanel from './CustomColorPanel';
 
 export default function ColorPanel() {
-  const setColor = useColorStore(state => state.setColor);
-  const [selectedPart, setSelectedPart] = useState(
-    meshToPart['mesh1643766101']
-  );
+  const { carColor, setCarColor } = useColorStore();
 
   return (
     <div
       style={{
         position: 'absolute',
-        top: 20,
-        left: 20,
-        background: 'white',
-        padding: 16,
-        borderRadius: 8,
-        zIndex: 10
+        bottom: 20,
+        left: 0,
+        width: '100%',
+        zIndex: 10,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 16
       }}
     >
-      <div style={{ marginBottom: 8 }}>
-        {Object.keys(meshToPart).map(k => (
-          <button key={k} onClick={() => setSelectedPart(meshToPart[k])}>
-            {meshToPart[k]}
-          </button>
-        ))}
-      </div>
-
-      <div style={{ display: 'flex', gap: 8 }}>
-        {swatches.map(color => (
+      {carColor.code === null && <CustomColorPanel />}
+      <div style={{ display: 'flex', gap: 16 }}>
+        {Object.keys(carColors).map(key => (
           <ColorDot
-            key={color}
-            backgroundColor={color}
-            onClick={() => setColor(selectedPart, color)}
-            label={color}
+            key={key}
+            backgroundColor={carColors[key].code}
+            isCustom={key === 'custom'}
+            isSelected={carColor.code === carColors[key].code}
+            onClick={() => setCarColor(carColors[key])}
+            label={key}
           />
         ))}
       </div>
-
-      <p>Editing: {selectedPart}</p>
     </div>
   );
 }

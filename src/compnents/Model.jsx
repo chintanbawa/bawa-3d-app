@@ -10,11 +10,12 @@ function Model({ partsColor }) {
     scene.traverse(child => {
       if (child.isMesh) {
         const part = meshToPart[child.name];
-        console.log('partsColor = ', partsColor);
         if (part) {
           const oldMaterial = child.material;
           child.material = oldMaterial.clone();
-          child.material.color.set(partsColor[part]);
+          if (partsColor[part]) {
+            child.material.color.set(partsColor[part]);
+          }
           disposables.push(oldMaterial);
         }
       }

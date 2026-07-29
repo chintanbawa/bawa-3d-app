@@ -4,6 +4,7 @@ const ColorDot = ({
   width = 24,
   backgroundColor = '#000',
   isSelected,
+  isCustom,
   onClick,
   label
 }) => (
@@ -16,7 +17,9 @@ const ColorDot = ({
       width: width,
       height: width,
       borderRadius: width,
-      backgroundColor,
+      background: isCustom
+        ? 'conic-gradient(red, yellow, green, blue, red)'
+        : backgroundColor,
       borderWidth: 4,
       borderStyle: isSelected ? 'solid' : 'none',
       borderColor: '#fff',

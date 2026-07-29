@@ -71,4 +71,8 @@ export const carColors = {
             tire_rubber: '#000',
         }
     },
+    custom: {
+        code: null,
+        partsColor: {}
+    },
 }
