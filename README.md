@@ -2,6 +2,8 @@
 
 An interactive 3D car color configurator built with React, Vite, and Three.js. Load a GLB car model into the scene, orbit around it, and re-color individual parts (exterior, rims, interior, grills, and more) in real time using preset color schemes or a fully custom per-part color picker.
 
+**Live demo:** [car-configurator-3d.vercel.app](https://car-configurator-3d.vercel.app/)
+
 ## Features
 
 - **3D scene** rendered with [react-three-fiber](https://github.com/pmndrs/react-three-fiber) and [drei](https://github.com/pmndrs/drei), including environment lighting (`apartment` preset) and orbit controls.
